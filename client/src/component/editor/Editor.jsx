@@ -10,12 +10,12 @@ import ModelForm from './ModelForm'
 import Draggable from 'react-draggable'
 import Draw from '../draw/Draw'
 import MyOwnImg from '../myOwnImg/MyForm'
+import Navbar from '../navbar/Navbar'
 
 
 
 class Editor extends Component {
     state={
-        imgref:"450",
         url:null,
         selectimg:null,
         shareurl:null,
@@ -24,6 +24,7 @@ class Editor extends Component {
         dtextT:false,
         textsecond:null,
         textThird:null,
+        textforth:null,
         isbold:null,
         iscaps:null,
         isitalic:null,
@@ -75,6 +76,13 @@ class Editor extends Component {
         this.setState({
             ...this.state,
             textThird:e.target.value
+        })
+       
+    }
+    forthTextItem=(e)=>{
+        this.setState({
+            ...this.state,
+            textforth:e.target.value
         })
        
     }
@@ -261,42 +269,31 @@ class Editor extends Component {
     
    
     render() {
+        
         const textStyle = {
             position:"absolute",
-            fontFamily:this.state.font,
-            fontSize:this.state.fontsize,
+            fontFamily:this.state.font ? this.state.font:"palatino",
+            fontSize:this.state.fontsize  ? this.state.fontsizeT:35,
             fontStyle:this.state.isitalic ? "italic":"normal",
             fontWeight:this.state.isbold ? "bold":"normal",
             textTransform:this.state.iscaps ?"uppercase":"normal",
-            color:this.state.color,
-            webkitTextFillColor:this.state.color,
-            webkitTextStrokeWidth:"1px",
-            WebkitTextStrokeColor:this.state.colorO,
-            userSelect: "none",
-            marginTop:100
+            color:this.state.color ?this.state.color:"red",
+            userSelect: "none" , 
+            marginTop:100,
           }
+
           const textStyle1={
             position:"absolute",
-            color:this.state.color,
-            fontFamily:this.state.fontT,
-            fontSize:this.state.fontsizeT,
+            color:this.state.color ?this.state.color:"red",
+            fontFamily:this.state.fontT ? this.state.fontT:"palatino",
+            fontSize:this.state.fontsizeT ? this.state.fontsizeT:35,
             fontStyle:this.state.isitalicT ? "italic":"normal",
             fontWeight:this.state.isboldT ? "bold":"normal",
             color:this.state.colorT,
             userSelect: "none" , 
             marginTop:300  
           }
-          const myStyle = {
-            position:"absolute",
-            textAlign:"center",
-            color:"red",
-            fontFamily:"palatino",
-            fontSize:"34px",
-            fontStyle:"normal",
-            fontWeight:"bold",
-            marginTop:200
-           
-          }
+        
         const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
        
     
@@ -304,69 +301,81 @@ class Editor extends Component {
      
 
         return (
-            
-            <div className="container mt-5">
-                <div className="row mb-5" style={{backgroundColor:'#fff',height:'100vh'}}>
-                   
-                    <div className="col-md-5 mt-5" style={{textAlign:this.state.textAlign}} >
+
+            <div>
+                <Navbar />
+            <div className="container">
+                <div className="row " style={{backgroundColor:'#272829',height:'100vh'}}>
+                    <div className="col-md-5 mt-1">
                         <ul >
                             <li style={{display:'inline-block'}}> <Draw /></li>
                             <li style={{display:'inline-block'}}><MyOwnImg ownImgUrl={this.ownImgUrl} /></li>
                         </ul>
                        
                         
-                        <div className="card" id='capture' style={{border:'none',height:500,width:450}} >
+                        <div className="card" id='capture' style={{
+                            border:'none',height:500,width:450,
+                           
+                            }} >
                       
-                        <canvas id="myCanvas" width="400" height="500" style={{border:"1px solid #d3d3d3"}}></canvas>
-                               
-                            
-                        <Draggable {...dragHandlers} >
-                            <div id="textone"   
-                                style={this.state.dtextO ?{...textStyle}:{...myStyle}}
-                                >
-                                {this.state.textFirst}    
-                            </div>
+                            <canvas id="myCanvas" width="400" height="500" style={{border:"1px solid #d3d3d3"}}></canvas>
+                                
+                                
+                            <Draggable {...dragHandlers} >
+                                <div id="textone"
+                                    style={{...textStyle}}
+                                    >
+                                    {this.state.textFirst}    
+                                </div>
                             </Draggable>
                             <Draggable {...dragHandlers} >
                                 <div id="textone" 
-                                    style={this.state.dtextT ?{...textStyle1}:{...myStyle}}
-                                     >
+                                    style={{...textStyle1}}
+                                    >
                                     {this.state.textsecond}   
                                 </div>
                             </Draggable>
                             <Draggable {...dragHandlers} >
-                            <div className="thirdtext "style={this.state.dtextO ?{...textStyle}:{...myStyle}}>
-                                <h3>{this.state.textThird}</h3>
-                            </div>  
+                                <div className="thirdtext "style={{...textStyle}}>
+                                    <h3>{this.state.textThird}</h3>
+                                </div>  
+                            </Draggable>
+                            <Draggable {...dragHandlers} >
+                                <div className="thirdtext "style={{...textStyle}}>
+                                    <h3>{this.state.textforth}</h3>
+                                </div>  
                             </Draggable>
                         </div>
                             
-                       
-                    
                     </div>
-                    <div className="col-md-7 mt-5">
+                    <div className="col-md-7 " style={{marginTop:70}}>
                         <div className="row">
                             <div className="col-md-7" id="editor1">
                                 <div className="featureimg">
                                     <div className="card" style={{border:'none'}}>
-                                        <div style={{ height: 300, overflowY: "scroll" }}>
+                                        <div style={{ height:200, overflowY: "scroll" }}>
                                             <FeatureImg selectedimg={this.selectedimg} />
                                         </div>
                                     </div>
                                 </div>
                                
-                                <div className="edittext">
-                                    <Text FirstTextItem={this.FirstTextItem} textdisplay={this.textdisplay} />
-                                </div>
-                                <div className="edittext">
-                                    <Textsecond secondTextItem={this.secondTextItem} textSdisplay={this.textSdisplay} />
-                                </div>
-                                <div className="edittext mt-2">
-                                <input type="text" class="form-control text" id="3" placeholder="something post...." onChange={this.thirdTextItem} />
-                                </div>
-                                {/* <ScreenCapture  /> */}
-                                <ModelForm imgurl={this.state.url} shareurl={this.state.shareurl} handleshareurl={this.handleshareurl} />
-                                
+                               <div className="text-input-edit">
+                                    <div className="edittext">
+                                        <Text FirstTextItem={this.FirstTextItem} textdisplay={this.textdisplay} />
+                                    </div>
+                                    <div className="edittext">
+                                        <Textsecond secondTextItem={this.secondTextItem} textSdisplay={this.textSdisplay} />
+                                    </div>
+                                    <div className="edittext mt-3">
+                                        <input type="text" class="form-control text bg-dark" id="3" placeholder="something post...." onChange={this.thirdTextItem} />
+                                    </div>
+                                    <div className="edittext mt-3">
+                                        <input type="text" class="form-control text bg-dark" id="3" placeholder="something post...." onChange={this.forthTextItem} />
+                                    </div>
+                                    </div>
+
+                                    <ModelForm imgurl={this.state.url} shareurl={this.state.shareurl} handleshareurl={this.handleshareurl} />
+                               
                                 
                                
                             </div>
@@ -406,6 +415,7 @@ class Editor extends Component {
                     </div>
                 </div>
                 </div>
+        </div>
                 
                 
             

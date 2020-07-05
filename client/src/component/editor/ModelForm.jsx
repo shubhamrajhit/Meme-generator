@@ -59,16 +59,16 @@ const ModelForm = (props) => {
   const toggle = () => setModal(!modal);
 
   return (
-    <div className="mt-5">
+    <div className="mt-4">
     <Button color="danger" onClick={both} >Generate Meme</Button>
       <Modal isOpen={modal} id="canvas_pack" toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}></ModalHeader>
         <ModalBody>
           {/* <canvas id="my_canvas_id" width="450" height="450" style={{border:"1px solid #d3d3d3"}} ></canvas> */}
           <img src={props.shareurl} style={{width:450,height:500}} /> 
          
         </ModalBody>
         <ModalFooter>
+            <a href={props.shareurl} download style={{marginRight:50}}> <i class="fa fa-download fa-2x" aria-hidden="true"></i></a>
           <FacebookShareButton url={props.shareurl}>
                 <FacebookIcon logoFillColor="white" />
           </FacebookShareButton>

@@ -52,6 +52,7 @@ class maindashTextOne extends Component {
                 <div className="row">
                     <div className="card pb-4" style={{width:'100%'}}>
                         <div className="row">
+                        <div style={{ height:450, overflowY: "scroll" }}>
                             <div className="col-md-12 mt-3 ml-3"><span><b>Font</b></span> <Font handleFont={this.handleFont} /></div>
                             <div className="col-md-12 mt-3 ml-3"><span><b></b></span> <Bold handleChecklistBold={this.handleChecklistBold} /></div>
                             <div className="col-md-12 mt-3 ml-3"><span><b></b></span> <Italic handleChecklistItalic={this.handleChecklistItalic} /></div>
@@ -61,6 +62,7 @@ class maindashTextOne extends Component {
                             <div className="col-md-12 mt-3 ml-3"><span><b>FontSize</b></span> <FontSize handleFontSize={this.handleFontSize} /></div>
                             <div className="col-md-12 mt-3 ml-3"><span><b>Text Align</b></span> <TextAlign handltextAlign={this.handltextAlign} /></div>
                             <div className="col-md-12 mt-3 ml-3"><span><b>Vertical Align</b></span> <VerticalAlign handleVerticalAlign={this.handleVerticalAlign} /></div>
+                        </div>
                         </div>
                        
                     

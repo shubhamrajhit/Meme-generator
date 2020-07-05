@@ -70,7 +70,7 @@ class Draw extends Component {
        
         return (
             <div className="mb-1">
-                <button onClick={this.handleClick} className="btn btn-light">Draw</button>
+                <button onClick={this.handleClick} className="btn btn-dark">Draw</button>
             </div>
         )
     }
